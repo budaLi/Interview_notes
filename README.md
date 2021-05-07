@@ -133,10 +133,52 @@
 
 笔试题是用伪代码解决自动驾驶中的具体问题，主要思路是用opencv裁剪出指定颜色的区域，进行分析...挺有意思的，具体要求和文档已上传. 
 
-文档：
+文档： 暂时无法上传...
 
-代码：
+代码： https://github.com/budaLi/Interview_notes/tree/main/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95
 
-主要涉及内容：
+主要涉及内容：  opencv处理图像
 
+
+### 2021-5-7  仙豆智能
+
+五一之前进行了第一轮电话面，时间太长具体忘了问什么了...
+
+一面电话面： 问了点python基础...具体的忘了
+
+二面：
+
+1. lis = {"x":1,"y":2,"z":3}
+    
+  删除lis中最小的元素
+  
+   ```
+      lis = {"x":1,"y":2,"z":3}
+      lis_tem = sorted(lis.items(),key=lambda y:y[1])
+      print(type(lis_tem))  # list
+      min_itmes = lis_tem[0]  # ("x",1)
+      print(min_itmes)
+      del lis[min_itmes[0]]
+      print(lis)
+   ```
+
+2. 冒泡排序
+    
+   lis = [3,2,1,5,4]
+   
+   ```
+      for i in range(len(lis)-1):
+        for j in range(len(lis)-1-i):
+            if lis[j]>lis[j+1]:
+               lis[j],lis[j+1] = lis[j+1],lis[j]
+   ```
+  
+  用过多线程没，爬虫呢...大概介绍了用的场景
+  
+  多线程如何等待呢，如何获取线程的输出结果..
+  
+  
+  三面 ： 为啥换工作，打算要多少..没问什么技术上的东西，问的很多都是工作内容。
+  
+  Hr面： 你的优势,为啥换工作，打算要多少，介绍了下公司现在的情况
 
