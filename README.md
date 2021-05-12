@@ -182,3 +182,140 @@
   
   Hr面： 你的优势,为啥换工作，打算要多少，介绍了下公司现在的情况
 
+
+### 2021-5-12 香侬后端开发
+
+1. a = [{"name": "zhangsan", "age": 43}, {"name": "lisi", "age": 18}, {"name": "mazi", "age": 25}, {"name": "wanger", "age": 21}]，对a按age降序排列。
+   
+   ```
+      a = [{"name": "zhangsan", "age": 43}, {"name": "lisi", "age": 18}, {"name": "mazi", "age": 25}, {"name": "wanger", "age": 21}]
+      
+      新的列表：
+      # lambad中的y其实已经是a中的每个字典 只需取age
+      new_a = sorted(a,key=lambda y:y["age"],reverse = True)
+      print(new_a)
+      
+      更改原列表：
+      a.sort(key = lambda:y["age"],reverse=True)
+      print(a)
+   ```
+
+ 2. 给一个列表， 如 a = [1, 3, 54, 300, 33, 72]，用列表表达式求列表中的所有奇数。
+
+    ```
+       a = [1, 3, 54, 300, 33, 72]
+       new_a = [one for one in a if one%2!=0]
+       print(new_a) 
+    ```
+ 3. 写出打印结果
+
+    ```
+      def test(p1, p2=dict()):
+          p2.update(p1)
+          return p2
+      a = {"a": 1}
+      b = {"b": 2}
+      a = test(a)
+      b = test(b)
+      print(a)
+      print(b)
+    ```
+    
+    这道题答案是a 和b均为 {"a":1,"b":1},原因猜测为调用两次test()函数时p2在内存中都是同一个对象，即id不变，如下：
+    ```
+        def test(p1, p2={}):
+            print(id(p2))
+            p2.update(p1)
+            return p2
+        a = {"a": 1}
+        b = {"b": 2}
+        a = test(a)
+        b = test(b)
+        print(a)
+        print(b)
+    ```
+
+4. 实现一个装饰器并调用。
+
+  很久不写，不会了..
+  
+  ```
+    def print_wraps(fun):
+      def wraps():
+          print("waaps")
+          fun()
+      return wraps
+    @print_wraps
+    def print_number():
+        print(1)
+    print_number()
+  ```
+  
+5. 编写一个类，为该类实现___call__方法并调用。
+    
+   __call__函数的主要作用是可以把类实例当做函数调用，具体的用途..没有接触过
+   
+   参考https://blog.csdn.net/xie_0723/article/details/79505131
+
+6. 实现一个函数反转链表，例如输入的链表是: 1->2->3->null，输出的是3->2->1->null
+  
+  ```
+      class ListNode:
+            def __init__(self,val,next=None):
+                self.val = val
+                self.next = next
+
+      def revser_node(root):
+          next_node = root.next
+          new_root =root
+          new_root.next = None
+          while next_node:
+              new_next_node = next_node.next
+              next_node.next = new_root
+              new_root = next_node
+              next_node = new_next_node
+          return new_root
+
+      def print_node(root):
+          while root:
+              print(root.val)
+              root = root.next
+    node1 = ListNode(1)
+    node2 = ListNode(2)
+    node3 = ListNode(3)
+    node1.next = node2
+    node2.next = node3
+    print_node(node1)
+    new_root = revser_node(node1)
+    print_node(new_root)
+  ```
+
+7. （非递归）遍历一颗二叉树，返回节点值列表（数组）。
+  
+   ```
+      class TreeNode:
+            def __init__(self, val=0, left=None, right=None):
+                self.val = val
+                self.left = left
+                self.right = right
+
+      def print_tree(root):
+          nodes = [root]
+          nodes_val_list = []
+          while len(nodes)>0:
+              node = nodes.pop(0)
+              nodes_val_list.append(node.val)
+              if node.left:
+                  nodes.append(node.left)
+              if node.right:
+                  nodes.append(node.right)
+          return nodes_val_list
+
+      root = TreeNode(1)
+      root2 = TreeNode(2)
+      root3 = TreeNode(3)
+      root.left = root2
+      root.right = root3
+      nodes_val_list = print_tree(root)
+      print(nodes_val_list)
+   ```
