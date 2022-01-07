@@ -338,13 +338,13 @@
    初版的实现是用list存储了16位数字，进行进制转换时用index获取该字符所对应的数字，初版代码如下:
    ```
    def trans(s):
-    res = 0
-    lis = [str(i) for i in range(10)]+["A",'B','C','D','E','F']
+      res = 0
+      lis = [str(i) for i in range(10)]+["A",'B','C','D','E','F']
 
-    for index in range(len(s)):
-        s_index = lis.index(s[index])
-        res += s_index*(16**(len(s)-1-index))
-    return res
+      for index in range(len(s)):
+          s_index = lis.index(s[index])
+          res += s_index*(16**(len(s)-1-index))
+      return res
     s = "AA0F245C"
     print(trans(s))
    ```
