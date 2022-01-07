@@ -326,3 +326,42 @@
 
 
 ### 2021-5-21  累了...缓缓，再议吧，怎么选都会后悔...
+
+
+### 2021-1-7  
+时隔半年，好像工作越久越没了学习的动力..
+
+### 2021-1-6 神策 大数据开发
+
+1. 16进制转10进制。  B1-> 177 AA0F245C 转成2853119068   
+   
+   初版的实现是用list存储了16位数字，进行进制转换时用index获取该字符所对应的数字，初版代码如下:
+   ```
+   def trans(s):
+    res = 0
+    lis = [str(i) for i in range(10)]+["A",'B','C','D','E','F']
+
+    for index in range(len(s)):
+        s_index = lis.index(s[index])
+        res += s_index*(16**(len(s)-1-index))
+    return res
+    s = "AA0F245C"
+    print(trans(s))
+   ```
+   面试官提出复杂度有优化。最终代码如下:
+      ```
+      def trans(s):
+          res = 0
+          dic = {str(i):i for i in range(10)}
+          dic2 = { "A":10, "B":11, "C":12,"D":13, "E":14, "F":15}
+          dic.update(dic2)
+          for index in range(len(s)):
+              s_index = dic[s[index]]
+              res += s_index*(16**(len(s)-1-index))
+          return res
+      s = "AA0F245C"
+      print(trans(s))
+      ```
+
+
+
