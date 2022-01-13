@@ -381,10 +381,44 @@
       s = "+-+-++++--"
       print(sort(s))
    ```
+ 
+2. 第1题的修改版，输入为列表，想要原地修改实现排序。
+   
+   ```
+      def sort(lis):
+          start = 0
+          end = len(lis)-1
+          while start<end:
+              while lis[start]=="+":
+                  start+=1
+              while start<end and lis[end]=="-":
+                  end-=1
+              lis[start],lis[end] = lis[end],lis[start]
+              print(start,end,lis)
+          return lis
+      lis =list("+-+-++++--")
+      print(sort(lis))
+   ```
    
 3. 将列表转成键为列表值，值为0的字典。如: ["李不搭"]转为{"李不搭":0}。
     ```
       names = ["李不搭"]
       print({name:0 for name in names})
     ```
+4. 列表中出现次数最多的元素及其出现次数
+   ```
+      def get_max(lis):
+          dic = {}
+          max_count = 0
+          max_one = None
+          for one in lis:
+              if one not in dic:
+                  dic[one] = 1
+              else:
+                  dic[one]+=1
+                  max_one,max_count = one if max_count<dic[one] else max_one,dic[one] if max_count<dic[one] else max_count
+          return max_one,max_count
+      lis =list("+-+-++++--11122223333333331111")
+      print(get_max(lis))
+   ```
 
