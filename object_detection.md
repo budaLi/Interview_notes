@@ -65,7 +65,7 @@
     尽管如此，论文的很多做法仍然广泛的影响着检测任务。
     
 
-### Fast RCNN 共享卷积运算
+### 2. Fast RCNN 共享卷积运算
 
  文章指出RCNN耗时的原因是RCNN在selective search生成近2k个 region proposal后，通过cnn在每一个region proposal上单独进行提取特征，没有共享计算。
  于是提出将特征提取网络在图片整体上运行完毕后，再在其特征图上根据region proposal的区域进行选取特征，共享了大部分计算。
@@ -92,6 +92,39 @@
       Fast RCNN文章最重要的贡献是将Proposal,Feature Extractir,Object Classification& Localization 统一在一个整体的结构中，并通过共享卷积提高了特征的利用效率。
       
       
+ ### 3. Faster RCNN 两阶段模型的深度化 Towards Real Time Object Detection with Region Proposal Networks
  
+ Faster RCNN是two-stage算法的奠基性工作，提出的RPN网络取代Selective search 算法，使得检测任务可以由神经网络端到端完成。  
+ 粗略的讲，Faster RCNN = RPN + Fast RCNN 
+ 由于Fast RCNN共享卷积运算的特性，引入RPN带来的计算量很小，使得Faster RCNN能以较高的效率运行。 并且精度SOTA(state of the art ,当前最佳).
+ 
+ 本文的主要贡献是提出RPN(Region Proposal Networks）,替代之前的SS算法。RPN讲Proposal这一任务建模为二分类的问题。(是否为物体)。
+ 
+ 
+  ![image](https://user-images.githubusercontent.com/31475416/160553790-b6aae9c3-6e0d-4812-b5e2-7d52fdd9c5d0.png)
+
+
+第一步是在一个滑动窗口上生成不同大小和长宽比例的anchor box,取定iou的阈值，按照ground truth标定这些anchor的正负，于是，传入RPN网络的样本数据
+被整理为anchor box（坐标）和每个anchor box是否有物体(二分类标签) ,RPN网络将每个样本映射成一个概率值和四个坐标值，概率值反应这个anchor box有
+物体的概率，四个坐标值用于回归定义物体的位置，最后将二分零和坐标回归的损失统一起来，作为RPN网络的目标训练。 
+由RPN得到的Region Proposal在根据概率值筛选后经过类似的标记过程，被传入RCNN子网络，进行多分类和坐标回归，同样用多任务损失将二者的损失结合。
+
+
+RCNN系列的算法，最终的目的都是提出Proposal region,然后进行分类和回归。 不论是RCNN的基于SS算法提出2k个左右的Region,然后去提取特征，交由Alexnet分类。
+还是FAST RCNN进一步优化，先提取整体图片的特征，再通过SS生成的proposal region在特征图上映射，再进行ROI pooling 归一化特征，还是Faster RCNN 提出的
+FPN, 改用anchor 的方式进行proposal的生成。
+
+
+### 4. YOLO YOU ONLY LOOK ONCE 
+
+单阶段模型没有第一步的区域检出过程，直接从图中检出结果，也被称为Region Free方法。
+
+YOLO是单目标检测算法的开山之作，它将检测任务表述成一个统一的、端到端的回归问题，并且以只处理图片一次同时得到位置和分类而得名。
+
+YOLO的工作流程如下:
   
+  1.准备数据： 将图片缩放，划分成等分的网格，每个网格按跟Ground Truth 的IOU分配到所要预测的样本。
+  
+  2.卷积网络： 由GoogleNet更改而来，每个网络对于每个类别预测一个条件概率值，并在网格基础上生成B个box ,每个box 预测五个回归值，四个表征位置
+
   
