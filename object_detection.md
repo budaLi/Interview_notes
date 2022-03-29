@@ -67,8 +67,31 @@
 
 ### Fast RCNN 共享卷积运算
 
+ 文章指出RCNN耗时的原因是RCNN在selective search生成近2k个 region proposal后，通过cnn在每一个region proposal上单独进行提取特征，没有共享计算。
+ 于是提出将特征提取网络在图片整体上运行完毕后，再在其特征图上根据region proposal的区域进行选取特征，共享了大部分计算。
  
-        
+ ![image](https://user-images.githubusercontent.com/31475416/160545615-32164372-90e0-4ca3-95cd-2d1f29a3a65b.png)
+
+  如上图，图片经过特征提取模型得到feature map, 同时在原图上运行selective search 算法得到ROI (Region of interest,实为坐标组)，将ROI映射到feature map上，
+  再对每个ROI进行ROI pooling 操作得到等长的feature vector, 并将这些feature vectore 进行正负样本的整理(保持一定的正负样本比例)，分batch传入并行的RCNN子网络，
+  同时进行分类和回归，并将两者的损失结合起来。
   
+  ![image](https://user-images.githubusercontent.com/31475416/160547001-5bc0f3f6-a501-440d-97aa-7003e4dba491.png)
+
+  我们得到的ROI通常是不同的大小，在映射到feature map后，会得到不同大小的特征向量。ROI Pooling先将ROI 等分成目标个数的网格，然后在每个格子上进行max pooling,就可
+  以得到等长的ROI feature vector.
+  
+  文章最后的讨论也有一定的借鉴意义：
+  
+  1. multi-loss traing 相比单独训练classification 确有提升。 (个人认为可能是目标框定位的准确性对分类结果也有影响)
+  2. multi-scale相比single-scale精度略有提升，但带来的时间开销更大，一定程度上说明CNN的尺度不变性。
+  3.... 其他的懒得看了 
+  
+  小结：
+      
+      Fast RCNN文章最重要的贡献是将Proposal,Feature Extractir,Object Classification& Localization 统一在一个整体的结构中，并通过共享卷积提高了特征的利用效率。
+      
+      
+ 
   
   
