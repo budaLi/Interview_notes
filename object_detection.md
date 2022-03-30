@@ -1,14 +1,16 @@
-# 2022-3-29
-
   基于深度学习的目标检测总结
   
   参考学习: 
-      https://zhuanlan.zhihu.com/p/354060133
-      https://zhuanlan.zhihu.com/p/34142321
-  
+      https://zhuanlan.zhihu.com/p/354060133 (基于深度学习的目标检测算法面试必备（RCNN~YOLOv5）
+      https://zhuanlan.zhihu.com/p/34142321  (干货 | 目标检测入门)
+      https://zhuanlan.zhihu.com/p/297965943 （YOLO算法最全综述：从YOLOv1到YOLOv5）
+      
   好像除了知道目标检测分为单阶段和多阶段，以及听说了RCNN,FAST-RCNN,FASTER-RCNN,YOLO系列等名词外，并不太清楚到底是做了什么。
   于是下面的总结基本是照着知乎的学习资料完全重新学习。
   
+  
+# 2022-3-29
+
   ## 导言 目标检测的任务表述
   
   计算机理解的图像信息，根据后续任务的需要，有三个主要的层次。
@@ -115,16 +117,22 @@ RCNN系列的算法，最终的目的都是提出Proposal region,然后进行分
 FPN, 改用anchor 的方式进行proposal的生成。
 
 
+# 2022-3-30
+
 ### 4. YOLO YOU ONLY LOOK ONCE 
 
 单阶段模型没有第一步的区域检出过程，直接从图中检出结果，也被称为Region Free方法。
 
 YOLO是单目标检测算法的开山之作，它将检测任务表述成一个统一的、端到端的回归问题，并且以只处理图片一次同时得到位置和分类而得名。
 
-YOLO的工作流程如下:
-  
-  1.准备数据： 将图片缩放，划分成等分的网格，每个网格按跟Ground Truth 的IOU分配到所要预测的样本。
-  
-  2.卷积网络： 由GoogleNet更改而来，每个网络对于每个类别预测一个条件概率值，并在网格基础上生成B个box ,每个box 预测五个回归值，四个表征位置
+YOLO vs Faster RCNN
 
+    1.统一网络：YOLO没有显求region proposal的过程，Faster RCNN中尽管RPN与fast rcnn共享卷积层，但是在模型训练中，需要反复训练RPN网络和Fast RCNN网络。
+    2.YOLO将检测统一为一个回归问题，而RCNN系列将检测分为两部分求解：物体分类和位置回归。
+
+1. YOLO V1
+
+  核心思想： 将整张图片作为网络的输入，直接在输出层对BBOX的位置和类别进行回归。
+  
+  
   
