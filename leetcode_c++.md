@@ -61,3 +61,42 @@
               };
   
   
+### 2022-3-30
+
+数组： 16. 最接近的三数之和
+
+![image](https://user-images.githubusercontent.com/31475416/160732259-3b00c645-76ff-4e93-88d1-f4f2d7755d56.png)
+
+
+排序+ 双指针
+
+
+        class Solution {
+            public:
+                int threeSumClosest(vector<int>& nums, int target) {
+                    sort(nums.begin(),nums.end());
+                    int n=nums.size();
+                    int ans=nums[0]+nums[1]+nums[2];
+                    for(int i=0;i<=nums.size()-3;i++){
+                        int left=i+1,right=n-1;
+                        while(left<right){
+                            int num=nums[i]+nums[left]+nums[right];
+                            if(num==target)return target;
+                            else if(num<target){
+                                ans=abs(target-num)>abs(target-ans)?ans:num;
+                                left++;
+                            }
+                            else {
+                                ans=abs(target-num)>abs(target-ans)?ans:num;
+                                --right;
+                            }
+                        }
+                    }
+                    return ans;
+                }
+            };
+
+
+
+ 
+ 
