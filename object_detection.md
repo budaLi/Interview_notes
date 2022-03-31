@@ -163,6 +163,32 @@ YOLO vs Faster RCNN
 
   参考 ：https://zhuanlan.zhihu.com/p/172121380
   
+  ![image](https://user-images.githubusercontent.com/31475416/160969315-c4ed73ca-0a3f-4e7a-9e20-12d59fb01050.png)
+
+  1）输入端: Mosaic数据增强  自适应锚框计算、自适应图片缩放
+  
+     Mosaic数据增强
+        
+          以随机缩放、随机裁剪、随机排布的方式进行拼接
+          
+  ![image](https://user-images.githubusercontent.com/31475416/160969832-948e6bff-7596-419a-a15d-d3d78086b724.png)
+
+     自适应锚框计算
+     
+          在Yolo算法中，针对不同的数据集，都会有初始设定长宽的锚框。在网络训练中，网络在初始锚框的基础上输出预测框，进而和真实框
+          groundtruth 进行对比，计算两者差距，再反向更新，迭代网络参数。
+          
+     自适应图片缩放
+      
+          在常用的目标检测算法中，不同的图片长宽都不相同，因此常用的方式是将原始图片统一缩放到标准尺寸，再送入检测网络中。
+          
+   ![image](https://user-images.githubusercontent.com/31475416/160971151-581dc098-5c30-4252-999e-4926d6109e06.png)
+
+    
+  2）Backbone： Focus结构，CSP结构
+  3）Neck: FPN+ PAN结构
+  4）Prediction: GIOU_Loss
+  
   
   
   
