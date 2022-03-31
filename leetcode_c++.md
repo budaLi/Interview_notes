@@ -97,6 +97,63 @@
             };
 
 
+### 2022-3-31
 
- 
+字符串： 5. 最长回文子串
+
+![image](https://user-images.githubusercontent.com/31475416/160960908-05b2bff8-29f0-4256-92c0-3de9de97d4ea.png)
+
+
+这道题之前用python提交的几次始终是超时，静下心来尝试发现还是很有意思的。需要注意的是字符串的边界以及几个特殊case的处理。 
+
+
+    class Solution(object):
+          def longestPalindrome(self, s):
+              """
+              :type s: str
+              :rtype: str
+              """
+              n = len(s)
+              dp = [[False for _ in range(n)] for _ in range(n)]
+
+              ans = s[0]
+              for i in range(n):
+                  dp[i][i] = True
+                  x = i + 1
+                  while x < n and s[i] == s[x]:
+                      dp[i][x] = True
+                      ans = s[i:x+1] if x - i >= len(ans) else ans
+                      x += 1
+              print("连续长的",ans)
+              index = 1
+              while index < n:
+                  tem_1 = index
+                  tem_2 = index
+                  while tem_2<n and dp[tem_1][tem_2]:
+                      tem_2 +=1
+                  tem_2-=1
+                  while  tem_1 >= 0 and tem_2 <n and s[tem_1] == s[tem_2] and dp[index][index] :
+                      dp[tem_1][tem_2] = True
+                      ans = s[tem_1:tem_2 +1] if tem_2 - tem_1 >= len(ans) else ans
+                      tem_1 -= 1
+                      tem_2 += 1
+                  index +=1
+
+              return ans
+
+
+      S = Solution()
+
+      s_list = ["babad","cbbd","a","aacabdkacaa","tattarrattat"]
+      for s in s_list:
+          ans = S.longestPalindrome(s)
+          print(s,ans)
+
+  
+  c++ 版本的懒得写了。 
+  
+      vector<vector<int>> dp(n, vector<int>(n));   二维数组的声明  
+      s.substr(begin, maxLen);
+
+  
  
