@@ -1,8 +1,11 @@
   基于深度学习的目标检测总结
   
   参考学习: 
+  
       https://zhuanlan.zhihu.com/p/354060133 (基于深度学习的目标检测算法面试必备（RCNN~YOLOv5）
+      
       https://zhuanlan.zhihu.com/p/34142321  (干货 | 目标检测入门)
+      
       https://zhuanlan.zhihu.com/p/297965943 （YOLO算法最全综述：从YOLOv1到YOLOv5）
       
   好像除了知道目标检测分为单阶段和多阶段，以及听说了RCNN,FAST-RCNN,FASTER-RCNN,YOLO系列等名词外，并不太清楚到底是做了什么。
@@ -133,6 +136,33 @@ YOLO vs Faster RCNN
 1. YOLO V1
 
   核心思想： 将整张图片作为网络的输入，直接在输出层对BBOX的位置和类别进行回归。
+  
+  
+  ![f0bd05c00f07a6a820a42a29d8859c2](https://user-images.githubusercontent.com/31475416/160964944-68a0bcda-29d7-4462-9193-6fbf7b4fc25b.jpg)
+
+
+2. YOLO V2
+
+  YOLO V2在V1的基础上，在保持速度的基础上，更准确，速度更快，识别的对象更多。（YOLO9000)
+  
+  文章提出了一种 联合训练算法。 同时在检测数据集和分类数据集上训练物体检测器，用检测数据集的数据学习物体的准确位置，用分类数据集的数量增加分类的类别量。
+  
+  ![image](https://user-images.githubusercontent.com/31475416/160965448-15be6772-f9c0-4e5c-8b6a-4abce5963588.png)
+
+
+  Batch Normalization 批量归一化
+  
+      
+     BN层一般放在线性层和非线性层之间，也就是卷积层和激活层之间。
+  
+     批量归一化有助于解决反向传播过程种的梯度消息和梯度爆炸现象，降低对一些超参数的敏感性，并且每个batch在进行归一化的时候，起到了一定的正则化效果，能够
+     获得更好的收敛速度和收敛效果。
+     
+
+3. YOLO V5
+
+  参考 ：https://zhuanlan.zhihu.com/p/172121380
+  
   
   
   
