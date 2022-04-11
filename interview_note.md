@@ -458,15 +458,141 @@
 6. ....其他的好像印象不太深了
 
 
-### 2022-4-7 四海华辰
+## 2022-4-7 四海华辰
 
 参加了线下面试，好像没聊一点技术相关的东西，Leader是山西人...介绍了很多公司现有的业务和发展方向。 感觉没啥问题。
 
-### 2022-4-7 中科海微
+## 2022-4-7 中科海微
 
 线上电话面试，聊了很多关于人脸门禁的内容，看起来是比较相同的业务。
 
-### 2022-4-8 
+## 2022-4-8 
 
 大早上和女友吵架，发现拉黑了微信，qq支付宝淘宝什么的都被删除了，有点想骂娘。
 
+
+## 2022-4-8  跳跃智能
+
+从下午四点大概陆续面试到八点，期间共有三位面试官。每个面试官都或多或少挑个项目问问，写下印象中记得的三道数据结构题。
+
+1. 给定一个升序的nums和target，返回target在nums中的位置，不存在返回-1.
+    
+   这道题....忘了考虑-1的情况、中间值怎么求也忘了，并且递归返回的结果有问题，面试官提出为什么觉得递归比while循环好用。答题的状态很差。
+   
+        def find_index(start,end,nums,target):
+            if start==end:
+                if nums[start]!=target:
+                    return -1
+                else:return start
+            mid_index = (start+end)//2
+            if nums[mid_index]==target:
+                return start+mid_index
+            elif nums[mid_index]>target:
+                end = mid_index -1
+                return find_index(start,end,nums,target)
+            else:
+                start = mid_index+1
+                return find_index(start,end,nums,target)
+
+        nums = [1,3,4,5,7,100]
+        target = 1001
+        start = 0
+        end = len(nums)-1
+        res = find_index(start,end,nums,target)
+        print(res)
+   
+   
+   
+          def find_index2(nums,target):
+              start = 0
+              end = len(nums)-1
+              while start<=end:
+                  mid_idx = (start+end)//2
+                  if nums[mid_idx]==target:
+                      return mid_idx
+                  elif nums[mid_idx]>target:
+                      end = mid_idx-1
+                  else:
+                      start = mid_idx+1
+              return -1
+   
+
+    确实精简很多
+    
+    
+    
+    
+    
+ 2. 给定一个升序的循环单链表头节点以及一个数字，将其插入。
+
+    ![image](https://user-images.githubusercontent.com/31475416/162675877-2aa4a1eb-e409-49a8-a9f9-53e55e08c6cf.png)
+    
+    这道题也是始终没找到合适的处理badcase的方法。意识到很久没有认真刷题了。
+    印象中写了三个if判断各种情况，总觉得应该有更优解。
+    
+    
+   
+          def print_node(node):
+              start_node = node
+              while node.next != start_node:
+                  print(node.val,end=" ")
+                  node = node.next
+              print(node.val,end=" ")
+
+          class Node:
+              def __init__(self,val,next= None):
+                  self.next = next
+                  self.val = val
+
+          def insert(node,number):
+              flag = True
+              while flag:
+                  if  (node.val <= number and node.next.val>=number) or (node.val <number and node.val>node.next.val):
+                      new_node = Node(number)
+                      new_node.next = node.next
+                      node.next = new_node
+                      flag = False
+                  node = node.next
+
+
+          def test1():
+              node1 = Node(1)
+              node2 = Node(5)
+              node3 = Node(7)
+              node4 = Node(10)
+              node5 = Node(12)
+              node1.next = node2
+              node2.next = node3
+              node3.next = node4
+              node4.next = node5
+              node5.next = node1
+              insert(node1,16)
+              print_node(node1)
+          def test2():
+              node1 = Node(1)
+              node2 = Node(1)
+              node1.next = node2
+              node2.next = node1
+
+              insert(node1,1)
+              print_node(node1)
+
+          test1()
+          print("\n")
+          test2()
+
+ 
+3. leetcode 413. 等差数列划分   
+   
+   ![image](https://user-images.githubusercontent.com/31475416/162707346-b7b27ff2-af15-4060-987e-0175566023d6.png)
+
+
+   觉得刚开始的出发思路就不对。比较粗暴的每三个元素进行判断的话，结果会错过很多超过3长度的等差数列。觉得可以用一个动态数组维护并且合并。
+   
+   
+   
+   
+   
+   
+
+    
