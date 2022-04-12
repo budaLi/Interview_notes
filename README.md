@@ -16,3 +16,10 @@ Mobilenet:
 
 https://github.com/budaLi/Interview_notes/blob/main/Mobilenet.md
     
+
+读论文
+
+https://github.com/budaLi/Interview_notes/blob/main/An%20Overview%20of%20Facial%20Micro-Expression%20Analysis:%20Data%2C%20Methodology%20and%20Challenge.md
+
+
+https://github.com/budaLi/Interview_notes/blob/main/Fast%20Facial%20Landmark%20Detection%20and%20Applications:%20A%20Survey%20.md
