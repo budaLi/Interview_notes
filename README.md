@@ -16,6 +16,10 @@ Mobilenet:
 
 https://github.com/budaLi/Interview_notes/blob/main/Mobilenet.md
     
+图像搜索：
+
+https://github.com/budaLi/Interview_notes/blob/main/image_retrieval.md
+
 
 读论文
 1. An Overview of Facial Micro-Expression Analysis: Data, Methodology and Challenge
